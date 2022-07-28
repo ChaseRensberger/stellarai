@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { createStyles, Header, Container, Group, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ThemeToggle } from './ThemeToggle';
-import Link from 'next/link';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 
 const useStyles = createStyles((theme) => ({
 	header: {
