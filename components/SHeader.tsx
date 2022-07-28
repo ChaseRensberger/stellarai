@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { createStyles, Header, Container, Group, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ThemeToggle } from './ThemeToggle';
+import Link from 'next/link';
+import router, { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -29,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 		padding: '8px 12px',
 		borderRadius: theme.radius.sm,
 		textDecoration: 'none',
+		cursor: 'pointer',
 		color:
 			theme.colorScheme === 'dark'
 				? theme.colors.dark[0]
@@ -68,13 +71,13 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	const items = links.map((link) => (
 		<a
 			key={link.label}
-			href={link.link}
 			className={cx(classes.link, {
 				[classes.linkActive]: active === link.link,
 			})}
 			onClick={(event) => {
 				event.preventDefault();
 				setActive(link.link);
+				router.push(link.link);
 			}}
 		>
 			{link.label}
@@ -85,7 +88,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 		<Header height={60} mb={120}>
 			<Container className={classes.header}>
 				<div>StellarAI</div>
-				<Group spacing={5} className={classes.links}>
+				<Group spacing={10} className={classes.links}>
 					{items}
 				</Group>
 				<ThemeToggle />
