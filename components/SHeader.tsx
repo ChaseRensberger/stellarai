@@ -84,7 +84,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	));
 
 	return (
-		<Header height={60} mb={120}>
+		<Header height={60}>
 			<Container className={classes.header}>
 				<div>StellarAI</div>
 				<Group spacing={10} className={classes.links}>

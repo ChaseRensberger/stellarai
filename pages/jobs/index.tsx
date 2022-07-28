@@ -2,13 +2,9 @@ import { Container, createStyles } from '@mantine/core';
 import type { NextPage } from 'next';
 
 const Jobs: NextPage = () => {
-	const { classes, cx } = useStyles();
+	const { classes } = useStyles();
 
-	return (
-		<main>
-			<Container className={classes.pageElem}></Container>
-		</main>
-	);
+	return <main>Jobs</main>;
 };
 
 const useStyles = createStyles((theme) => ({
