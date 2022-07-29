@@ -1,4 +1,4 @@
-import { Container, createStyles } from '@mantine/core';
+import { createStyles } from '@mantine/core';
 import type { NextPage } from 'next';
 import { UserInfoIcons } from '../components/UserInfo';
 
