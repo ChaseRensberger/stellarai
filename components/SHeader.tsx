@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { createStyles, Header, Container, Group, Burger } from '@mantine/core';
+import { createStyles, Header, Container, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { ThemeToggle } from './ThemeToggle';
 import router from 'next/router';
+import { logOut } from '../lib/firebase';
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -90,7 +90,13 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 				<Group spacing={10} className={classes.links}>
 					{items}
 				</Group>
-				<ThemeToggle />
+				<Button
+					onClick={() => {
+						logOut();
+					}}
+				>
+					Log Out
+				</Button>
 			</Container>
 		</Header>
 	);
