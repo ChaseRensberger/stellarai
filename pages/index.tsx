@@ -7,13 +7,6 @@ import { useAuth } from '../lib/firebase';
 
 const Profile: NextPage = () => {
 	const { classes } = useStyles();
-	const currentUser = useAuth();
-
-	useEffect(() => {
-		if (!currentUser) {
-			router.push('/enter');
-		}
-	}, [currentUser]);
 
 	return (
 		<main>

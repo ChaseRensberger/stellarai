@@ -13,17 +13,9 @@ import {
 } from '@mantine/core';
 import { signIn, signUp, useAuth } from '../../lib/firebase';
 import { useEffect, useState } from 'react';
-import router from 'next/router';
 
 const AuthenticationForm = (props: PaperProps) => {
 	const currentUser = useAuth();
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		if (currentUser) {
-			router.push('/');
-		}
-	}, [currentUser]);
 
 	async function HandleEnter(
 		name: string,
@@ -31,7 +23,6 @@ const AuthenticationForm = (props: PaperProps) => {
 		password: string,
 		type: string
 	) {
-		setLoading(true);
 		if (type == 'register') {
 			try {
 				await signUp(email, password);
@@ -45,7 +36,6 @@ const AuthenticationForm = (props: PaperProps) => {
 				alert('Error!');
 			}
 		}
-		setLoading(false);
 	}
 
 	const [type, toggle] = useToggle(['login', 'register']);

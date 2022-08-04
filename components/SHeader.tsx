@@ -67,6 +67,10 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	const [active, setActive] = useState(links[0].link);
 	const { classes, cx } = useStyles();
 
+	async function handleLogout() {
+		await logOut();
+	}
+
 	const items = links.map((link) => (
 		<a
 			key={link.label}
@@ -92,7 +96,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 				</Group>
 				<Button
 					onClick={() => {
-						logOut();
+						handleLogout();
 					}}
 				>
 					Log Out
