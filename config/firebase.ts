@@ -18,6 +18,4 @@ export function getEnvironment() {
 
 const config = getEnvironment();
 const app = initializeApp(config.firebase);
-const auth = getAuth(app);
-
-export { auth };
+export const auth = getAuth(app);
