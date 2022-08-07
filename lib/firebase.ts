@@ -1,43 +1,23 @@
 import { initializeApp } from 'firebase/app';
-import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	onAuthStateChanged,
-	signInWithEmailAndPassword,
-	signOut,
-} from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { getAuth } from 'firebase/auth';
 
-const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-	authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-	projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-	storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-	messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-	appId: process.env.NEXT_PUBLIC_APP_ID,
-};
+export function getEnvironment() {
+	return {
+		firebase: {
+			apiKey: String(process.env.NEXT_PUBLIC_API_KEY),
+			authDomain: String(process.env.NEXT_PUBLIC_AUTH_DOMAIN),
+			databaseURL: String(process.env.NEXT_PUBLIC_DATABASE_URL),
+			projectId: String(process.env.NEXT_PUBLIC_PROJECT_ID),
+			storageBucket: String(process.env.NEXT_PUBLIC_STORAGE_BUCKET),
+			messagingSenderId: String(process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID),
+			appId: String(process.env.NEXT_PUBLIC_APP_ID),
+		},
+		baseURL: String(process.env.NEXT_PUBLIC_BASE_URL),
+	};
+}
 
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth();
+const config = getEnvironment();
+const app = initializeApp(config.firebase);
+const auth = getAuth(app);
 
-export const signUp = (email: string, password: string) => {
-	return createUserWithEmailAndPassword(auth, email, password);
-};
-
-export const signIn = (email: string, password: string) => {
-	return signInWithEmailAndPassword(auth, email, password);
-};
-
-export const logOut = () => {
-	return signOut(auth);
-};
-
-export const useAuth = () => {
-	const [currentUser, setCurrentUser] = useState(null);
-
-	useEffect(() => {
-		return onAuthStateChanged(auth, (user: any) => setCurrentUser(user));
-	}, []);
-
-	return currentUser;
-};
+export { auth };

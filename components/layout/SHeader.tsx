@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { createStyles, Header, Container, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import router from 'next/router';
-import { logOut } from '../lib/firebase';
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -67,10 +66,6 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	const [active, setActive] = useState(links[0].link);
 	const { classes, cx } = useStyles();
 
-	async function handleLogout() {
-		await logOut();
-	}
-
 	const items = links.map((link) => (
 		<a
 			key={link.label}
@@ -96,7 +91,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 				</Group>
 				<Button
 					onClick={() => {
-						handleLogout();
+						console.log('hey');
 					}}
 				>
 					Log Out

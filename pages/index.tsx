@@ -1,9 +1,6 @@
 import { createStyles } from '@mantine/core';
 import type { NextPage } from 'next';
-import router from 'next/router';
-import { useEffect } from 'react';
-import { UserInfoIcons } from '../components/UserInfo';
-import { useAuth } from '../lib/firebase';
+import { UserInfoIcons } from '../components/profile/UserInfo';
 
 const Profile: NextPage = () => {
 	const { classes } = useStyles();

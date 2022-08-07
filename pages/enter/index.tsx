@@ -11,33 +11,8 @@ import {
 	Anchor,
 	Stack,
 } from '@mantine/core';
-import { signIn, signUp, useAuth } from '../../lib/firebase';
-import { useEffect, useState } from 'react';
 
 const AuthenticationForm = (props: PaperProps) => {
-	const currentUser = useAuth();
-
-	async function HandleEnter(
-		name: string,
-		email: string,
-		password: string,
-		type: string
-	) {
-		if (type == 'register') {
-			try {
-				await signUp(email, password);
-			} catch {
-				alert('Error!');
-			}
-		} else {
-			try {
-				await signIn(email, password);
-			} catch {
-				alert('Error!');
-			}
-		}
-	}
-
 	const [type, toggle] = useToggle(['login', 'register']);
 	const form = useForm({
 		initialValues: {
@@ -63,14 +38,14 @@ const AuthenticationForm = (props: PaperProps) => {
 			</Text>
 
 			<form
-				onSubmit={form.onSubmit(() => {
-					HandleEnter(
-						form.values.name,
-						form.values.email,
-						form.values.password,
-						type
-					);
-				})}
+			// onSubmit={form.onSubmit(() => {
+			// 	HandleEnter(
+			// 		form.values.name,
+			// 		form.values.email,
+			// 		form.values.password,
+			// 		type
+			// 	);
+			// })}
 			>
 				<Stack>
 					{type === 'register' && (
