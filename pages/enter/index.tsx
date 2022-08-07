@@ -14,6 +14,9 @@ import {
 
 const AuthenticationForm = (props: PaperProps) => {
 	const [type, toggle] = useToggle(['login', 'register']);
+
+	const handleSubmit = (name: string, email: string, password: string) => {};
+
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -38,14 +41,13 @@ const AuthenticationForm = (props: PaperProps) => {
 			</Text>
 
 			<form
-			// onSubmit={form.onSubmit(() => {
-			// 	HandleEnter(
-			// 		form.values.name,
-			// 		form.values.email,
-			// 		form.values.password,
-			// 		type
-			// 	);
-			// })}
+				onSubmit={form.onSubmit(() => {
+					handleSubmit(
+						form.values.name,
+						form.values.email,
+						form.values.password
+					);
+				})}
 			>
 				<Stack>
 					{type === 'register' && (

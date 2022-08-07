@@ -4,8 +4,6 @@ import { AppShell, MantineProvider } from '@mantine/core';
 import Head from 'next/head';
 import { HeaderSimple } from '../components/layout/SHeader';
 import { useRouter } from 'next/router';
-import FirebaseProvider from '../components/context/FirebaseProvider';
-import { auth } from '../lib/firebase';
 
 const DeterHeader = () => {
 	const router = useRouter();
@@ -34,11 +32,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<MantineProvider withGlobalStyles withNormalizeCSS>
-				<FirebaseProvider auth={auth}>
-					<AppShell header={<DeterHeader />}>
-						<Component {...pageProps} />
-					</AppShell>
-				</FirebaseProvider>
+				<AppShell header={<DeterHeader />}>
+					<Component {...pageProps} />
+				</AppShell>
 			</MantineProvider>
 		</>
 	);
