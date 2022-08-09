@@ -4,6 +4,9 @@ import { AppShell, MantineProvider } from '@mantine/core';
 import Head from 'next/head';
 import { HeaderSimple } from '../components/layout/SHeader';
 import { useRouter } from 'next/router';
+import { auth } from '../config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { UserContext } from '../components/context';
 
 const DeterHeader = () => {
 	const router = useRouter();
@@ -24,6 +27,8 @@ const DeterHeader = () => {
 };
 
 const App = ({ Component, pageProps }: AppProps) => {
+	const [user, loading, error] = useAuthState(auth);
+
 	return (
 		<>
 			<Head>
@@ -32,9 +37,13 @@ const App = ({ Component, pageProps }: AppProps) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<MantineProvider withGlobalStyles withNormalizeCSS>
-				<AppShell header={<DeterHeader />}>
-					<Component {...pageProps} />
-				</AppShell>
+				<UserContext.Provider
+					value={{ user: user, loading: loading, error: error }}
+				>
+					<AppShell header={<DeterHeader />}>
+						<Component {...pageProps} />
+					</AppShell>
+				</UserContext.Provider>
 			</MantineProvider>
 		</>
 	);

@@ -12,7 +12,6 @@ export function getEnvironment() {
 			messagingSenderId: String(process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID),
 			appId: String(process.env.NEXT_PUBLIC_APP_ID),
 		},
-		baseURL: String(process.env.NEXT_PUBLIC_BASE_URL),
 	};
 }
 
