@@ -1,15 +1,22 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, Pagination, Stack } from '@mantine/core';
 import type { NextPage } from 'next';
+import { data } from '../../components/jobs/MockTableData';
+import { TableSelection } from '../../components/jobs/Table';
 
 const Jobs: NextPage = () => {
-	return <main>Jobs</main>;
+	const { classes } = useStyles();
+
+	return (
+		<Stack align={'center'}>
+			<TableSelection data={data} />
+			<Pagination total={10} withEdges />
+		</Stack>
+	);
 };
 
 const useStyles = createStyles((theme) => ({
-	pageElem: {
-		height: '100vh',
-		marginBottom: '40vh',
-		backgroundColor: 'black',
+	pageWrapper: {
+		width: '100vw',
 	},
 }));
 

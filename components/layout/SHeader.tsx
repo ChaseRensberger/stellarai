@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createStyles, Header, Container, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
 
 const useStyles = createStyles((theme) => ({
@@ -10,6 +10,7 @@ const useStyles = createStyles((theme) => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		height: '100%',
+		width: '90%',
 	},
 
 	links: {
@@ -98,6 +99,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 				<Group spacing={10} className={classes.links}>
 					{items}
 				</Group>
+
 				<Button
 					onClick={() => {
 						signOutUser();

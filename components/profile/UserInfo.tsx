@@ -8,10 +8,6 @@ const useStyles = createStyles((theme) => ({
 				? theme.colors.dark[3]
 				: theme.colors.gray[5],
 	},
-
-	name: {
-		fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-	},
 }));
 
 interface UserInfoIconsProps {
@@ -35,7 +31,7 @@ export function UserInfoIcons({
 			<Group noWrap>
 				<Avatar src={avatar} size={94} radius="md" />
 				<div>
-					<Text size="lg" weight={500} className={classes.name}>
+					<Text size="lg" weight={500}>
 						{name}
 					</Text>
 					<Text

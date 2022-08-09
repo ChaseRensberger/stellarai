@@ -1,12 +1,17 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { AppShell, MantineProvider } from '@mantine/core';
+import {
+	AppShell,
+	MantineProvider,
+	ColorSchemeProvider,
+	ColorScheme,
+} from '@mantine/core';
 import Head from 'next/head';
 import { HeaderSimple } from '../components/layout/SHeader';
 import { useRouter } from 'next/router';
-import { auth } from '../config/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { AuthProvider } from '../components/context/AuthContext';
+import { useState } from 'react';
+import { SwitchToggle } from '../components/layout/ThemeToggle';
 
 const DeterHeader = () => {
 	const router = useRouter();
@@ -27,7 +32,9 @@ const DeterHeader = () => {
 };
 
 const App = ({ Component, pageProps }: AppProps) => {
-	const [user, loading, error] = useAuthState(auth);
+	const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+	const toggleColorScheme = (value?: ColorScheme) =>
+		setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
 	return (
 		<>
@@ -36,13 +43,23 @@ const App = ({ Component, pageProps }: AppProps) => {
 				<meta name="description" content="StellarAI" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<MantineProvider withGlobalStyles withNormalizeCSS>
-				<AuthProvider>
-					<AppShell header={<DeterHeader />}>
-						<Component {...pageProps} />
-					</AppShell>
-				</AuthProvider>
-			</MantineProvider>
+			<ColorSchemeProvider
+				colorScheme={colorScheme}
+				toggleColorScheme={toggleColorScheme}
+			>
+				<MantineProvider
+					withGlobalStyles
+					withNormalizeCSS
+					theme={{ colorScheme }}
+				>
+					<AuthProvider>
+						<AppShell header={<DeterHeader />}>
+							<Component {...pageProps} />
+						</AppShell>
+						<SwitchToggle />
+					</AuthProvider>
+				</MantineProvider>
+			</ColorSchemeProvider>
 		</>
 	);
 };
