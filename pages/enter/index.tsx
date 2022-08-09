@@ -12,10 +12,19 @@ import {
 	Stack,
 } from '@mantine/core';
 import { useAuth } from '../../components/context/AuthContext';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const AuthenticationForm = (props: PaperProps) => {
 	const [type, toggle] = useToggle(['login', 'register']);
-	const { signup } = useAuth();
+	const { currentUser, signUpUser, signInUser } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (currentUser) {
+			router.push('/');
+		}
+	}, [currentUser]);
 
 	const handleSubmit = async (
 		name: string,
@@ -23,7 +32,10 @@ const AuthenticationForm = (props: PaperProps) => {
 		password: string
 	) => {
 		if (type == 'register') {
-			await signup(email, password);
+			await signUpUser(email, password);
+		}
+		if (type == 'login') {
+			await signInUser(email, password);
 		}
 	};
 

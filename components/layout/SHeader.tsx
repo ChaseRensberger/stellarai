@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createStyles, Header, Container, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
+import { useAuth } from '../context/AuthContext';
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -65,6 +66,14 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	const [opened, { toggle }] = useDisclosure(false);
 	const [active, setActive] = useState(links[0].link);
 	const { classes, cx } = useStyles();
+	const { currentUser, signOutUser } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!currentUser) {
+			router.push('/enter');
+		}
+	}, [currentUser]);
 
 	const items = links.map((link) => (
 		<a
@@ -91,7 +100,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 				</Group>
 				<Button
 					onClick={() => {
-						console.log('hey');
+						signOutUser();
 					}}
 				>
 					Log Out
