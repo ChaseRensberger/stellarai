@@ -6,7 +6,7 @@ import { HeaderSimple } from '../components/layout/SHeader';
 import { useRouter } from 'next/router';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { UserContext } from '../components/context';
+import { AuthProvider } from '../components/context/AuthContext';
 
 const DeterHeader = () => {
 	const router = useRouter();
@@ -37,13 +37,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<MantineProvider withGlobalStyles withNormalizeCSS>
-				<UserContext.Provider
-					value={{ user: user, loading: loading, error: error }}
-				>
+				<AuthProvider>
 					<AppShell header={<DeterHeader />}>
 						<Component {...pageProps} />
 					</AppShell>
-				</UserContext.Provider>
+				</AuthProvider>
 			</MantineProvider>
 		</>
 	);

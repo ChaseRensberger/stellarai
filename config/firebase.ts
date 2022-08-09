@@ -1,20 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-export function getEnvironment() {
-	return {
-		firebase: {
-			apiKey: String(process.env.NEXT_PUBLIC_API_KEY),
-			authDomain: String(process.env.NEXT_PUBLIC_AUTH_DOMAIN),
-			databaseURL: String(process.env.NEXT_PUBLIC_DATABASE_URL),
-			projectId: String(process.env.NEXT_PUBLIC_PROJECT_ID),
-			storageBucket: String(process.env.NEXT_PUBLIC_STORAGE_BUCKET),
-			messagingSenderId: String(process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID),
-			appId: String(process.env.NEXT_PUBLIC_APP_ID),
-		},
-	};
-}
+const firebaseConfig = {
+	apiKey: 'AIzaSyBUu-PEDlBG3DPJ7YrM1bvl__wP4l9VEjw',
+	authDomain: 'stellarai-60df0.firebaseapp.com',
+	projectId: 'stellarai-60df0',
+	storageBucket: 'stellarai-60df0.appspot.com',
+	messagingSenderId: '473227712166',
+	appId: '1:473227712166:web:3f88f3827c7adb72334667',
+	measurementId: 'G-GM3F6J1Z8E',
+};
 
-const config = getEnvironment();
-const app = initializeApp(config.firebase);
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

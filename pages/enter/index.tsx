@@ -11,30 +11,20 @@ import {
 	Anchor,
 	Stack,
 } from '@mantine/core';
-import { useContext } from 'react';
-import { UserContext } from '../../components/context';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '../../config/firebase';
+import { useAuth } from '../../components/context/AuthContext';
 
 const AuthenticationForm = (props: PaperProps) => {
 	const [type, toggle] = useToggle(['login', 'register']);
-
-	const { user, loading, error } = useContext(UserContext);
-	const [createUserWithEmailAndPassword] =
-		useCreateUserWithEmailAndPassword(auth);
+	const { signup } = useAuth();
 
 	const handleSubmit = async (
 		name: string,
 		email: string,
 		password: string
 	) => {
-		console.log(user);
-		if (type == 'login') {
-			// await loginWithEmailAndPassword(name, email);
-		} else if (type == 'register') {
-			await createUserWithEmailAndPassword(name, email);
+		if (type == 'register') {
+			await signup(email, password);
 		}
-		console.log(user);
 	};
 
 	const form = useForm({
