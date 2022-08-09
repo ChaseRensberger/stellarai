@@ -1,5 +1,6 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, Stack } from '@mantine/core';
 import type { NextPage } from 'next';
+import { DropzoneButton } from '../components/profile/Dropzone';
 import { UserInfoIcons } from '../components/profile/UserInfo';
 
 const Profile: NextPage = () => {
@@ -7,7 +8,7 @@ const Profile: NextPage = () => {
 
 	return (
 		<main>
-			<div className={classes.pageWrapper}>
+			<Stack align={'center'} spacing="xl">
 				<h1>Good Morning!</h1>
 				<UserInfoIcons
 					avatar={''}
@@ -16,7 +17,8 @@ const Profile: NextPage = () => {
 					phone={'012-345-6789'}
 					email={'email@email.com'}
 				/>
-			</div>
+				<DropzoneButton />
+			</Stack>
 		</main>
 	);
 };
