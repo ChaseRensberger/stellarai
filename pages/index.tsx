@@ -34,10 +34,10 @@ const Profile: NextPage = () => {
 					<Stack align={'center'} spacing={'xs'}>
 						<Avatar size={'xl'} radius={'xl'} />
 						<Text weight={700} size={'xl'}>
-							Chase Rensberger
+							FirstName LastName
 						</Text>
 						<Text weight={400} size={'md'}>
-							Software Engineer at BlueHalo
+							Software Engineer at Company
 						</Text>
 					</Stack>
 				</Card>
