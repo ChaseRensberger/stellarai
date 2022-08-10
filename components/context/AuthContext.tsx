@@ -12,7 +12,8 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { auth } from '../../config/firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
 
 const AuthContext = createContext({} as any);
 
@@ -28,16 +29,34 @@ export const AuthProvider = ({ children }: AuthProps) => {
 	const [currentUser, setCurrentUser] = useState<User | null>();
 	const [loading, setLoading] = useState<boolean>(true);
 
-	const signUpUser = (email: string, password: string) => {
-		return createUserWithEmailAndPassword(auth, email, password);
+	const signUpUser = async (email: string, password: string, name: string) => {
+		try {
+			const { user } = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			try {
+				const docRef = await addDoc(collection(db, 'users'), {
+					UID: user.uid,
+					name: name,
+					email: email,
+				});
+				console.log('Document written with ID: ', docRef.id);
+			} catch (e) {
+				console.error('Error adding document: ', e);
+			}
+		} catch (e) {
+			console.log('Error creating user', e);
+		}
 	};
 
-	const signInUser = (email: string, password: string) => {
-		return signInWithEmailAndPassword(auth, email, password);
+	const signInUser = async (email: string, password: string) => {
+		await signInWithEmailAndPassword(auth, email, password);
 	};
 
-	const signOutUser = () => {
-		return signOut(auth);
+	const signOutUser = async () => {
+		await signOut(auth);
 	};
 
 	useEffect(() => {

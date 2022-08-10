@@ -32,7 +32,7 @@ const AuthenticationForm = (props: PaperProps) => {
 		password: string
 	) => {
 		if (type == 'register') {
-			await signUpUser(email, password);
+			await signUpUser(email, password, name);
 		}
 		if (type == 'login') {
 			await signInUser(email, password);
