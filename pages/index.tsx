@@ -2,21 +2,26 @@ import {
 	createStyles,
 	Container,
 	Grid,
-	Box,
+	Avatar,
 	SimpleGrid,
 	useMantineTheme,
-	Skeleton,
+	Card,
+	Stack,
+	Text,
+	Divider,
+	Space,
+	Button,
 } from '@mantine/core';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { DropzoneButton } from '../components/profile/Dropzone';
 import { UserInfoIcons } from '../components/profile/UserInfo';
+import { StatsRing } from '../components/profile/Stats';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const Profile: NextPage = () => {
 	const { classes } = useStyles();
-	const PRIMARY_COL_HEIGHT = 600;
-	const theme = useMantineTheme();
-	const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
 
 	return (
 		<Container size={'xl'}>
@@ -25,28 +30,51 @@ const Profile: NextPage = () => {
 				spacing="md"
 				breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
 			>
-				<Skeleton height={PRIMARY_COL_HEIGHT} radius="md" animate={false} />
+				<Card shadow="md">
+					<Stack align={'center'} spacing={'xs'}>
+						<Avatar size={'xl'} radius={'xl'} />
+						<Text weight={700} size={'xl'}>
+							Chase Rensberger
+						</Text>
+						<Text weight={400} size={'md'}>
+							Software Engineer at BlueHalo
+						</Text>
+					</Stack>
+				</Card>
 				<Grid gutter="md">
 					<Grid.Col>
-						<Skeleton
-							height={SECONDARY_COL_HEIGHT}
-							radius="md"
-							animate={false}
-						/>
+						<Card shadow="md">
+							<DropzoneButton />
+						</Card>
 					</Grid.Col>
-					<Grid.Col span={6}>
-						<Skeleton
-							height={SECONDARY_COL_HEIGHT}
-							radius="md"
-							animate={false}
-						/>
-					</Grid.Col>
-					<Grid.Col span={6}>
-						<Skeleton
-							height={SECONDARY_COL_HEIGHT}
-							radius="md"
-							animate={false}
-						/>
+					<Grid.Col span={12}>
+						<Card shadow="md">
+							<StatsRing
+								data={[
+									{
+										label: "Comparison's Made",
+										stats: '200',
+										progress: 80,
+										color: 'green',
+										icon: 'up',
+									},
+									{
+										label: "Comparison's Madee",
+										stats: '200',
+										progress: 80,
+										color: 'green',
+										icon: 'up',
+									},
+									{
+										label: "Comparison's Madeee",
+										stats: '200',
+										progress: 80,
+										color: 'green',
+										icon: 'up',
+									},
+								]}
+							/>
+						</Card>
 					</Grid.Col>
 				</Grid>
 			</SimpleGrid>
