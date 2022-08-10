@@ -1,4 +1,12 @@
-import { createStyles, Stack } from '@mantine/core';
+import {
+	createStyles,
+	Container,
+	Grid,
+	Box,
+	SimpleGrid,
+	useMantineTheme,
+	Skeleton,
+} from '@mantine/core';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { DropzoneButton } from '../components/profile/Dropzone';
@@ -6,29 +14,43 @@ import { UserInfoIcons } from '../components/profile/UserInfo';
 
 const Profile: NextPage = () => {
 	const { classes } = useStyles();
-	const myDate = new Date();
-	const [greet, setGreet] = useState('');
-	useEffect(() => {
-		let hrs = myDate.getHours();
-		if (hrs < 12) setGreet('Good Morning');
-		else if (hrs >= 12 && hrs <= 17) setGreet('Good Afternoon');
-		else if (hrs >= 17 && hrs <= 24) setGreet('Good Evening');
-	}, []);
+	const PRIMARY_COL_HEIGHT = 600;
+	const theme = useMantineTheme();
+	const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
 
 	return (
-		<main>
-			<Stack align={'center'} spacing="xl">
-				<h1>{greet}</h1>
-				<UserInfoIcons
-					avatar={''}
-					name={'John Smith'}
-					title={'Software Engineer'}
-					phone={'012-345-6789'}
-					email={'email@email.com'}
-				/>
-				<DropzoneButton />
-			</Stack>
-		</main>
+		<Container size={'xl'}>
+			<SimpleGrid
+				cols={2}
+				spacing="md"
+				breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
+			>
+				<Skeleton height={PRIMARY_COL_HEIGHT} radius="md" animate={false} />
+				<Grid gutter="md">
+					<Grid.Col>
+						<Skeleton
+							height={SECONDARY_COL_HEIGHT}
+							radius="md"
+							animate={false}
+						/>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<Skeleton
+							height={SECONDARY_COL_HEIGHT}
+							radius="md"
+							animate={false}
+						/>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<Skeleton
+							height={SECONDARY_COL_HEIGHT}
+							radius="md"
+							animate={false}
+						/>
+					</Grid.Col>
+				</Grid>
+			</SimpleGrid>
+		</Container>
 	);
 };
 

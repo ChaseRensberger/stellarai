@@ -21,8 +21,9 @@ const DeterHeader = () => {
 		return (
 			<HeaderSimple
 				links={[
-					{ link: '/', label: 'Profile' },
 					{ link: '/jobs', label: 'Jobs' },
+					{ link: '/', label: 'Profile' },
+					{ link: '/about', label: 'About' },
 				]}
 			/>
 		);
