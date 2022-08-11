@@ -13,15 +13,40 @@ import {
 	Button,
 } from '@mantine/core';
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import { DropzoneButton } from '../components/profile/Dropzone';
-import { UserInfoIcons } from '../components/profile/UserInfo';
 import { StatsRing } from '../components/profile/Stats';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+	doc,
+	getDoc,
+	query,
+	collection,
+	where,
+	getDocs,
+} from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { useAuth } from '../components/context/AuthContext';
+import { useEffect, useState } from 'react';
 
 const Profile: NextPage = () => {
 	const { classes } = useStyles();
+	const { currentUser } = useAuth();
+	const [profileDetails, setProfileDetails] = useState<any>({});
+
+	useEffect(() => {
+		const getUserDetails = async () => {
+			const q = query(
+				collection(db, 'users'),
+				where('UID', '==', currentUser.uid)
+			);
+			const querySnapshot = await getDocs(q);
+			querySnapshot.forEach((doc) => {
+				setProfileDetails({ name: doc.data().name });
+			});
+		};
+
+		getUserDetails();
+		// console.log(userDetails);
+	}, [currentUser]);
 
 	return (
 		<Container size={'xl'}>
@@ -34,7 +59,7 @@ const Profile: NextPage = () => {
 					<Stack align={'center'} spacing={'xs'}>
 						<Avatar size={'xl'} radius={'xl'} />
 						<Text weight={700} size={'xl'}>
-							FirstName LastName
+							{profileDetails.name}
 						</Text>
 						<Text weight={400} size={'md'}>
 							Software Engineer at Company
