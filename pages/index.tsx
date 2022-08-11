@@ -43,8 +43,11 @@ const Profile: NextPage = () => {
 				setProfileDetails({ name: doc.data().name });
 			});
 		};
-
-		getUserDetails();
+		try {
+			getUserDetails();
+		} catch (e) {
+			console.log(e);
+		}
 		// console.log(userDetails);
 	}, [currentUser]);
 
