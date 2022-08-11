@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { createStyles, Header, Container, Group, Button } from '@mantine/core';
+import {
+	createStyles,
+	Header,
+	Container,
+	Group,
+	Button,
+	Text,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
@@ -95,7 +102,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 	return (
 		<Header height={60}>
 			<Container className={classes.header}>
-				<div>StellarAI</div>
+				<Text weight={500} size={'md'}>
+					StellarJobs
+				</Text>
 				<Group spacing={10} className={classes.links}>
 					{items}
 				</Group>
