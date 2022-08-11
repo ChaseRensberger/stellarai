@@ -62,7 +62,7 @@ const Profile: NextPage = () => {
 							{profileDetails.name}
 						</Text>
 						<Text weight={400} size={'md'}>
-							Software Engineer at Company
+							Job Title coming soon!
 						</Text>
 					</Stack>
 				</Card>
@@ -77,24 +77,24 @@ const Profile: NextPage = () => {
 							<StatsRing
 								data={[
 									{
-										label: "Comparison's Made",
-										stats: '200',
+										label: 'Resume stats coming soon',
+										stats: '100',
 										progress: 80,
 										color: 'green',
 										icon: 'up',
 									},
 									{
-										label: "Comparison's Madee",
+										label: 'Resume stats coming soon',
 										stats: '200',
 										progress: 80,
-										color: 'green',
+										color: 'red',
 										icon: 'up',
 									},
 									{
-										label: "Comparison's Madeee",
-										stats: '200',
+										label: 'Resume stats coming soon',
+										stats: '40',
 										progress: 80,
-										color: 'green',
+										color: 'yellow',
 										icon: 'up',
 									},
 								]}

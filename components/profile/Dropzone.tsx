@@ -71,7 +71,7 @@ export function DropzoneButton() {
 					<Text align="center" weight={700} size="lg" mt="xl">
 						<Dropzone.Accept>Drop files here</Dropzone.Accept>
 						<Dropzone.Reject>Pdf file less than 30mb</Dropzone.Reject>
-						<Dropzone.Idle>Upload resume</Dropzone.Idle>
+						<Dropzone.Idle>Resume upload coming soon</Dropzone.Idle>
 					</Text>
 					<Text align="center" size="sm" mt="xs" color="dimmed">
 						Drag&apos;n&apos;drop files here to upload. We can accept only{' '}
