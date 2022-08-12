@@ -1,36 +1,30 @@
-import {
-	createStyles,
-	Pagination,
-	Stack,
-	Divider,
-	Text,
-	Group,
-	Select,
-	Container,
-	RangeSlider,
-} from '@mantine/core';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+import { createStyles } from '@mantine/core';
 import type { NextPage } from 'next';
-import { data } from '../../components/jobs/MockTableData';
 import { TableSelection } from '../../components/jobs/Table';
+import { uuidv4 } from '@firebase/util';
 
-const Jobs: NextPage = () => {
+export async function getStaticProps() {
+	const querySnapshot = await getDocs(collection(db, 'jobs'));
+	let jobList: any = [];
+	querySnapshot.forEach((doc) => {
+		jobList.push(doc.data());
+	});
+	jobList.forEach((job: any) => {
+		job.id = uuidv4();
+	});
+	return {
+		props: {
+			data: jobList,
+		}, // will be passed to the page component as props
+	};
+}
+
+const Jobs: NextPage = ({ data }: any) => {
 	const { classes } = useStyles();
 
-	return (
-		<Stack align={'center'}>
-			<Group align={'center'} position={'apart'} sx={{ width: '100%' }}>
-				<Select
-					style={{ zIndex: 2 }}
-					data={['Engineer', 'Analyst', 'Recruiter']}
-					placeholder="Pick one"
-					label="Filter by role"
-				/>
-				<Pagination total={10} withEdges sx={{ marginTop: '1.4%' }} />
-			</Group>
-			<Divider my="sm" variant="dashed" sx={{ width: '100%' }} />
-			<TableSelection data={data} />
-		</Stack>
-	);
+	return <TableSelection data={data} />;
 };
 
 const useStyles = createStyles((theme) => ({

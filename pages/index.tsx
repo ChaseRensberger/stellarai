@@ -34,21 +34,24 @@ const Profile: NextPage = () => {
 
 	useEffect(() => {
 		const getUserDetails = async () => {
-			const q = query(
-				collection(db, 'users'),
-				where('UID', '==', currentUser.uid)
-			);
-			const querySnapshot = await getDocs(q);
-			querySnapshot.forEach((doc) => {
-				setProfileDetails({ name: doc.data().name });
-			});
+			try {
+				const q = query(
+					collection(db, 'users'),
+					where('UID', '==', currentUser.uid)
+				);
+				const querySnapshot = await getDocs(q);
+				querySnapshot.forEach((doc) => {
+					setProfileDetails({ name: doc.data().name });
+				});
+			} catch (e) {
+				console.log(e);
+			}
 		};
 		try {
 			getUserDetails();
 		} catch (e) {
 			console.log(e);
 		}
-		// console.log(userDetails);
 	}, [currentUser]);
 
 	return (
