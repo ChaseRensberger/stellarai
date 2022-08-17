@@ -18,14 +18,8 @@ interface StatsRingProps {
 	}[];
 }
 
-const icons = {
-	up: IconArrowUpRight,
-	down: IconArrowDownRight,
-};
-
 export function StatsRing({ data }: StatsRingProps) {
 	const stats = data.map((stat) => {
-		const Icon = icons[stat.icon];
 		return (
 			<Paper withBorder radius="md" p="xs" key={stat.label}>
 				<Group>
@@ -34,11 +28,6 @@ export function StatsRing({ data }: StatsRingProps) {
 						roundCaps
 						thickness={8}
 						sections={[{ value: stat.progress, color: stat.color }]}
-						label={
-							<Center>
-								<Icon size={22} stroke={1.5} />
-							</Center>
-						}
 					/>
 
 					<div>

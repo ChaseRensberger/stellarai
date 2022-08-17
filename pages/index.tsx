@@ -56,11 +56,7 @@ const Profile: NextPage = () => {
 
 	return (
 		<Container size={'xl'}>
-			<SimpleGrid
-				cols={2}
-				spacing="md"
-				breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
-			>
+			<Stack>
 				<Card shadow="md">
 					<Stack align={'center'} spacing={'xs'}>
 						<Avatar size={'xl'} radius={'xl'} />
@@ -83,21 +79,63 @@ const Profile: NextPage = () => {
 							<StatsRing
 								data={[
 									{
-										label: 'Resume stats coming soon',
+										label: 'Account Manager',
 										stats: '100',
-										progress: 80,
+										progress: 20,
 										color: 'green',
 										icon: 'up',
 									},
 									{
-										label: 'Resume stats coming soon',
+										label: 'Consultant',
 										stats: '200',
 										progress: 80,
 										color: 'red',
 										icon: 'up',
 									},
 									{
-										label: 'Resume stats coming soon',
+										label: 'Data Analyst',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Data Scientist',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Marketing',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Product Manager',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Project Manager',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Sales',
+										stats: '40',
+										progress: 80,
+										color: 'yellow',
+										icon: 'up',
+									},
+									{
+										label: 'Ux Designer',
 										stats: '40',
 										progress: 80,
 										color: 'yellow',
@@ -108,7 +146,7 @@ const Profile: NextPage = () => {
 						</Card>
 					</Grid.Col>
 				</Grid>
-			</SimpleGrid>
+			</Stack>
 		</Container>
 	);
 };
